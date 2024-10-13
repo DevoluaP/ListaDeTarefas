@@ -1,0 +1,16 @@
+<h1 class="tasks-title">
+    Lista de Tarefas
+    <fa-icon [icon]="faRightFromBracket" (click)="onLogout()" class="icon-logout" />
+</h1>
+
+<button [ngStyle]="{ 'background': 'green' }" class="btn" (click)="navigateToAddTask()">
+    Adicionar Tarefa
+</button>
+
+<app-task-item
+    *ngFor="let tarefa of tarefas"
+    [tarefa]="tarefa"
+    (onDeleteTask)="deleteTask($event)"
+    (onEditTask)="editTask($event)"
+    (onToggleConcluido)="toggleConcluido($event)"
+/>

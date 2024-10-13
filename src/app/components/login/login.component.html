@@ -1,0 +1,19 @@
+<div class="login-container">
+    <h2>Login</h2>
+
+    <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="usuario"
+        placeholder="Usuário"
+    />
+    
+    <input
+        type="password"
+        class="form-control"
+        [(ngModel)]="senha"
+        placeholder="Senha"
+    />
+
+    <button class="btn" (click)="onSubmit()">Entrar</button>
+</div>  

@@ -1,0 +1,11 @@
+.tasks-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icon-logout:hover {
+    color: red;
+    scale: 1.1;
+    cursor: pointer;
+}

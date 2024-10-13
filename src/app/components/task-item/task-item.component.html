@@ -1,0 +1,47 @@
+<div class="task" (dblclick)="onToggle(tarefa)" [ngClass]="{ reminder: tarefa.status }">
+    <div *ngIf="editMode; else viewMode">
+        <label>Título:</label>
+        <input [(ngModel)]="tarefa.titulo" type="text" class="form-control" placeholder="Título" />
+
+        <label>Descrição:</label>
+        <input [(ngModel)]="tarefa.descricao" type="text" class="form-control" placeholder="Descrição" />
+
+        <button (click)="saveEdit()" [ngStyle]="{ 'background': 'green' }" class="btn">
+            Salvar
+        </button>
+
+        <button (click)="cancelEdit()" [ngStyle]="{ 'background': 'red' } "class="btn">
+            Cancelar
+        </button>
+    </div>
+
+    <ng-template #viewMode>
+        <h3>
+            {{ tarefa.titulo }}
+
+            <fa-icon
+                [icon]="faTimes"
+                [ngStyle]="{ 'color': 'red' }"
+                (click)="onDelete(tarefa)"
+                class="icon-close"
+            />
+        </h3>
+
+        <p>{{ tarefa.descricao }}</p>
+
+        <p>
+            Criado em: {{ tarefa.dataDeCriacao }}
+            
+            @if (tarefa.status) {
+                <fa-icon [icon]="faCircleCheck" [ngStyle]="{ 'color': 'green' }" class="icon-status" />
+            } @else {
+                <fa-icon [icon]="faHourglassHalf" class="icon-status" />
+            }
+        </p>
+        <p>
+            Clique duas vezes para marcar como concluída!
+            
+            <fa-icon [icon]="faPenToSquare" (click)="onEdit()" class="icon-edit" />
+        </p>
+    </ng-template>
+</div>

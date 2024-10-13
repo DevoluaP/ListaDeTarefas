@@ -1,0 +1,33 @@
+<form (ngSubmit)="onSubmit()" class="add-form">
+    <div>
+        <input
+            type="text"
+            id="titulo"
+            name="titulo"
+            class="form-control"
+            placeholder="Título"
+            [(ngModel)]="titulo"
+        />
+    </div>
+
+    <div>
+        <input
+            type="text"
+            id="descricao"
+            name="descricao"
+            class="form-control"
+            placeholder="Descrição"
+            [(ngModel)]="descricao"
+        />
+    </div>
+
+    <input
+        type="submit"
+        value="Criar Tarefa"
+        class="btn btn-block"
+        [ngStyle]="{ 'background': 'green' }"
+    />
+    <button [ngStyle]="{ 'background': 'red' }" class="btn btn-block" (click)="onClick()">
+        Cancelar
+    </button>
+</form>

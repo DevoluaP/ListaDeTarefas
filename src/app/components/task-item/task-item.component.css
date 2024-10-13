@@ -1,0 +1,25 @@
+.task {
+    background: #F4F4F4;
+    margin: 5px;
+    cursor: pointer;
+    padding: 10px 20px;
+}
+
+.task.reminder { border-left: 5px solid green }
+
+.task h3, .task p {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icon-close { margin-left: 15px }
+
+.icon-close:hover { scale: 1.2 }
+
+.icon-status, .icon-edit {
+    scale: 1.8;
+    margin-left: 15px;
+}
+
+.icon-edit:hover { scale: 2 }

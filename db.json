@@ -1,0 +1,18 @@
+{
+  "login": [
+    {
+      "id": "3b91",
+      "usuario": "user",
+      "senha": "password"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "1",
+      "titulo": "Implementação de uma aplicação de lista de tarefas (To-Do List) com autenticação.",
+      "descricao": "Desenvolvido com Angular, TypeScript e JSON Server.",
+      "dataDeCriacao": "12/10/2024",
+      "status": true
+    }
+  ]
+}
