@@ -19,6 +19,9 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 export class TasksComponent implements OnInit {
 
   tarefas: Tarefa[] = [];
+  currentPage: number = 1;
+  tarefasPerPage: number = 10;
+  totalTasks: number = 0;
 
   faRightFromBracket = faRightFromBracket;
 
@@ -29,10 +32,31 @@ export class TasksComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.taskService.getTasks().subscribe((data) => {
+    this.loadTasks();
+  }
+
+  loadTasks(): void {
+    this.taskService.getTasks(this.currentPage, this.tarefasPerPage).subscribe((data) => {
       this.tarefas = data;
-      console.log(data);
     });
+
+    this.taskService.getTotalTasks().subscribe(total => {
+      this.totalTasks = total;
+    });
+  }
+
+  nextPage(): void {
+    if ((this.currentPage * this.tarefasPerPage) < this.totalTasks) {
+      this.currentPage++;
+      this.loadTasks();
+    }
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.loadTasks();
+    }
   }
 
   onLogout() {
@@ -49,9 +73,15 @@ export class TasksComponent implements OnInit {
   deleteTask(tarefa: Tarefa) {
     const confirmed = confirm("Deseja excluir a tarefa?");
     if (confirmed) {
-      this.taskService.deleteTask(tarefa).subscribe(() => 
-        (this.tarefas = this.tarefas.filter((t) => t.id !== tarefa.id))
-      );
+      this.taskService.deleteTask(tarefa).subscribe(() => {
+        this.loadTasks();
+        this.totalTasks--;
+
+        if (this.tarefas.length === 0 && this.currentPage > 1) {
+          this.currentPage--;
+          this.loadTasks();
+        }
+      });
     }
   }
 

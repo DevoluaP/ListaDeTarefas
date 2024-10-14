@@ -3,9 +3,13 @@
     <fa-icon [icon]="faRightFromBracket" (click)="onLogout()" class="icon-logout" />
 </h1>
 
-<button [ngStyle]="{ 'background': 'green' }" class="btn" (click)="navigateToAddTask()">
-    Adicionar Tarefa
-</button>
+<div class="container-tasks">
+    <button [ngStyle]="{ 'background': 'green' }" class="btn" (click)="navigateToAddTask()">
+        Adicionar Tarefa
+    </button>
+
+    <p>Total de tarefas: {{ totalTasks }}</p>
+</div>
 
 <app-task-item
     *ngFor="let tarefa of tarefas"
@@ -14,3 +18,19 @@
     (onEditTask)="editTask($event)"
     (onToggleConcluido)="toggleConcluido($event)"
 />
+
+<div class="pagination">
+    <button (click)="prevPage()" class="btn-pagination" [disabled]="currentPage === 1">
+        Página Anterior
+    </button>
+
+    <span>Página {{ currentPage }}</span>
+
+    <button
+        (click)="nextPage()"
+        class="btn-pagination"
+        [disabled]="(currentPage * tarefasPerPage) >= totalTasks"
+    >
+        Próxima Página
+    </button>
+</div>

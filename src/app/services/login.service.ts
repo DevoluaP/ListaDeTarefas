@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { isPlatformBrowser } from "@angular/common";
+import { Injectable, Inject, PLATFORM_ID } from "@angular/core";
 import { Router } from "@angular/router";
 
 @Injectable({
@@ -10,7 +11,11 @@ export class LoginService {
   
   private apiURL = "http://localhost:3000/login";
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   login(credenciais: { usuario: string; senha: string; }) {
     this.http.get<any[]>(this.apiURL).subscribe(users => {
@@ -22,18 +27,24 @@ export class LoginService {
         alert("Usuário e/ou Senha incorreto!");
         return;
       }
+
+      if (isPlatformBrowser(this.platformId)) {
+        localStorage.setItem("isLoggedIn", "true");
+      }
   
-      localStorage.setItem("isLoggedIn", "true");
       this.router.navigate(["/tasks"]);
     });
   }
 
   logout() {
-    localStorage.removeItem("isLoggedIn");
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem("isLoggedIn");
+    }
+
     this.router.navigate(["/login"]);
   }
 
   isAuthenticated(): boolean {
-    return localStorage.getItem("isLoggedIn") === "true";
+    return isPlatformBrowser(this.platformId) && localStorage.getItem("isLoggedIn") === "true";
   }
 }

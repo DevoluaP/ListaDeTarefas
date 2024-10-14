@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, map } from "rxjs";
 import { Tarefa } from "../../Tarefa";
 
 @Injectable({
@@ -13,8 +13,15 @@ export class TaskService {
 
   constructor(private http: HttpClient) { }
 
-  getTasks() : Observable<Tarefa[]>{
-    return this.http.get<Tarefa[]>(this.apiURL);
+  getTasks(page: number, limit: number): Observable<Tarefa[]> {
+    const params = `?_page=${ page }&_limit=${ limit }`;
+    return this.http.get<Tarefa[]>(`${ this.apiURL }${ params }`);
+  }
+
+  getTotalTasks(): Observable<number> {
+    return this.http.get<Tarefa[]>(this.apiURL).pipe(
+      map(data => data.length)
+    );
   }
 
   deleteTask(tarefa: Tarefa): Observable<Tarefa> {

@@ -1,4 +1,4 @@
-.tasks-title {
+.tasks-title, .container-tasks {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -8,4 +8,15 @@
     color: red;
     scale: 1.1;
     cursor: pointer;
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+  
+.btn-pagination {
+  padding: 10px;
+  font-size: 14px;
 }
