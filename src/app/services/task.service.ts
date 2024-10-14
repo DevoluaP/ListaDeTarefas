@@ -13,9 +13,11 @@ export class TaskService {
 
   constructor(private http: HttpClient) { }
 
-  getTasks(page: number, limit: number): Observable<Tarefa[]> {
-    const params = `?_page=${ page }&_limit=${ limit }`;
-    return this.http.get<Tarefa[]>(`${ this.apiURL }${ params }`);
+  getTasks(currentPage: number, tarefasPerPage: number): Observable<Tarefa[]> {
+    const params = `?_page=${ currentPage }&_per_page=${ tarefasPerPage }`;
+    return this.http.get<{ data: Tarefa[] }>(`${ this.apiURL }${ params }`).pipe(
+      map(response => response.data)
+    );
   }
 
   getTotalTasks(): Observable<number> {

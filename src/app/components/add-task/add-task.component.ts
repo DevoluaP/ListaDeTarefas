@@ -14,6 +14,7 @@ import { TaskService } from "../../services/task.service";
 })
 
 export class AddTaskComponent {
+  
   titulo: string = "";
   descricao: string = "";
   dataDeCriacao!: Date;

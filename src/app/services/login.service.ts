@@ -18,21 +18,20 @@ export class LoginService {
   ) {}
 
   login(credenciais: { usuario: string; senha: string; }) {
-    this.http.get<any[]>(this.apiURL).subscribe(users => {
+    return this.http.get<any[]>(this.apiURL).subscribe(users => {
       const user = users.find(
         u => u.usuario === credenciais.usuario && u.senha === credenciais.senha
       );
 
-      if (!user) {
-        alert("Usuário e/ou Senha incorreto!");
-        return;
-      }
-
-      if (isPlatformBrowser(this.platformId)) {
-        localStorage.setItem("isLoggedIn", "true");
-      }
+      if (user) {
+        if (isPlatformBrowser(this.platformId)) {
+          localStorage.setItem("isLoggedIn", "true");
+        }
   
-      this.router.navigate(["/tasks"]);
+        this.router.navigate(["/tasks"]);
+      } else {
+        alert("Usuário e/ou Senha incorreto!");
+      }
     });
   }
 

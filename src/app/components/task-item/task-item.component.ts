@@ -14,6 +14,7 @@ import { FormsModule } from "@angular/forms";
 })
 
 export class TaskItemComponent {
+  
   @Input() tarefa!:Tarefa;
   @Output() onDeleteTask = new EventEmitter<Tarefa>();
   @Output() onEditTask = new EventEmitter<Tarefa>();

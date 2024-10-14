@@ -24,12 +24,12 @@
         Página Anterior
     </button>
 
-    <span>Página {{ currentPage }}</span>
+    <p>Página {{ currentPage }} de {{ totalPages }}</p>
 
     <button
         (click)="nextPage()"
         class="btn-pagination"
-        [disabled]="(currentPage * tarefasPerPage) >= totalTasks"
+        [disabled]="currentPage === totalPages"
     >
         Próxima Página
     </button>

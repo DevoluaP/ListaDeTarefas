@@ -1,5 +1,3 @@
-import { BlobOptions } from "buffer";
-
 export interface Tarefa {
     id?: number,
     titulo: string,

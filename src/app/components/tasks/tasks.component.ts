@@ -17,11 +17,12 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 })
 
 export class TasksComponent implements OnInit {
-
+  
   tarefas: Tarefa[] = [];
   currentPage: number = 1;
   tarefasPerPage: number = 10;
   totalTasks: number = 0;
+  totalPages: number = 0;
 
   faRightFromBracket = faRightFromBracket;
 
@@ -36,17 +37,28 @@ export class TasksComponent implements OnInit {
   }
 
   loadTasks(): void {
+    this.tarefas = [];
+
     this.taskService.getTasks(this.currentPage, this.tarefasPerPage).subscribe((data) => {
       this.tarefas = data;
+      this.updateTotalTasks();
     });
-
+    
     this.taskService.getTotalTasks().subscribe(total => {
       this.totalTasks = total;
+      this.totalPages = Math.ceil(this.totalTasks / this.tarefasPerPage);
+    });
+  }
+
+  updateTotalTasks(): void {
+    this.taskService.getTotalTasks().subscribe(total => {
+      this.totalTasks = total;
+      this.totalPages = Math.ceil(this.totalTasks / this.tarefasPerPage);
     });
   }
 
   nextPage(): void {
-    if ((this.currentPage * this.tarefasPerPage) < this.totalTasks) {
+    if ((this.currentPage < this.totalPages)) {
       this.currentPage++;
       this.loadTasks();
     }
@@ -74,13 +86,15 @@ export class TasksComponent implements OnInit {
     const confirmed = confirm("Deseja excluir a tarefa?");
     if (confirmed) {
       this.taskService.deleteTask(tarefa).subscribe(() => {
-        this.loadTasks();
+        this.tarefas = this.tarefas.filter(t => t.id !== tarefa.id);
         this.totalTasks--;
 
         if (this.tarefas.length === 0 && this.currentPage > 1) {
           this.currentPage--;
           this.loadTasks();
         }
+
+        this.updateTotalTasks();
       });
     }
   }
