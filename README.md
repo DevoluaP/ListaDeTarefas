@@ -1,27 +1,108 @@
 # ListaDeTarefas
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.8.
+Este projeto é uma aplicação de lista de tarefas desenvolvida com **Angular**. O objetivo é gerenciar tarefas, permitindo **adicionar**, **editar** e **deletar** tarefas. A aplicação oferece uma interface simples e intuitiva para interagir com as tarefas, além de manter as funcionalidades essenciais para gerenciamento de atividades diárias.
 
-## Development server
+## Funcionalidades
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Adicionar nova tarefa**: Permite adicionar uma nova tarefa à lista.
+- **Editar tarefa**: Você pode editar o nome ou status de uma tarefa existente.
+- **Deletar tarefa**: A qualquer momento, você pode excluir uma tarefa da lista.
 
-## Code scaffolding
+## Tecnologias utilizadas
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Angular**: Framework para desenvolvimento da aplicação.
+- **Karma**: Framework de testes unitários.
+- **Angular CLI**: Ferramenta de linha de comando para facilitar o desenvolvimento.
 
-## Build
+## Instalação
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Para rodar o projeto localmente, siga os passos abaixo:
 
-## Running unit tests
+### 1. Clone o repositório
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+git clone https://github.com/seu-usuario/lista-de-tarefas.git
+```
 
-## Running end-to-end tests
+### 2. Instale as dependências
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Após clonar o repositório, navegue até a pasta do projeto e instale as dependências utilizando o npm:
 
-## Further help
+```
+cd lista-de-tarefas
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```
+npm install
+```
+
+### 3. Rode o servidor de desenvolvimento
+
+Execute o seguinte comando para rodar o servidor local:
+
+```
+ng serve
+```
+
+Isso irá iniciar o servidor de desenvolvimento e você pode acessar a aplicação no seguinte endereço:
+
+http://localhost:4200/
+
+A aplicação será recarregada automaticamente quando você fizer mudanças nos arquivos fonte.
+
+### 4. Login
+
+Para acessar a aplicação, utilize as seguintes credenciais de login:
+
+- **Usuário**: `user`
+- **Senha**: `password`
+
+## Comandos do Angular CLI
+
+### Geração de componentes
+
+Para gerar um novo componente, execute o seguinte comando:
+
+```
+ng generate component nome-do-componente
+```
+
+Você também pode gerar outros itens como diretivas, pipes, serviços, classes, interfaces, enums e módulos, por exemplo:
+
+```
+ng generate directive nome-da-diretiva
+```
+
+```
+ng generate service nome-do-serviço
+```
+
+### Build
+
+Para gerar o build de produção, execute:
+
+```
+ng build --prod
+```
+
+Os arquivos gerados serão armazenados na pasta `dist/`.
+
+### Testes unitários
+
+Para rodar os testes unitários da aplicação, utilize o seguinte comando:
+
+```
+ng test
+```
+
+Os testes são executados usando o Karma, que vai abrir um navegador e rodar os testes automaticamente.
+
+### Testes end-to-end
+
+Se você quiser rodar os testes end-to-end, execute o seguinte comando:
+
+```
+ng e2e
+```
+
+Lembre-se de que você precisará configurar um pacote de testes end-to-end, como o Protractor, para rodar esse comando.
